@@ -1,7 +1,7 @@
 
 // you can use api key as well to acess but that's v3 and less secure and your keys   will be expose 
 //  this authorization bearer is more secure way ..  prefered in production environment
-async  function getTrendingTvShows(time_window)
+async  function getTrendingTvShows(time_window,page ="1")
 {
     const options = 
     {
@@ -14,7 +14,7 @@ async  function getTrendingTvShows(time_window)
 
     try
     {
-        const res = await fetch(`https://api.themoviedb.org/3/trending/tv/${time_window}?language=en-US`, options); // res will receive a promise
+        const res = await fetch(`https://api.themoviedb.org/3/trending/tv/${time_window}?page=${page}language=en-US`, options); // res will receive a promise
         console.log(res);
         const data = await res.json(); // you  have to wait here as well for the resolution 
         console.log(data);

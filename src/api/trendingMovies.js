@@ -3,7 +3,7 @@ const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 // fetch trending movies
 
-export const getTrendingMovies = async(time_window) =>{
+export const getTrendingMovies = async(time_window ="day" ,page ="1") =>{
 const options = {
   method: 'GET',
   headers: {
@@ -13,7 +13,7 @@ const options = {
 };
 
     try{
-        const res = await fetch(`https://api.themoviedb.org/3/trending/movie/${time_window}?language=en-US`, options);
+        const res = await fetch(`https://api.themoviedb.org/3/trending/movie/${time_window}?page=${page}language=en-US`, options);
         console.log(`this is response for trending movie ${time_window}`,res);
         const data = await res.json();
         console.log(data);

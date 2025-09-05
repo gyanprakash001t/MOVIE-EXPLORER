@@ -3,6 +3,7 @@ import { getTrendingMovies } from "../api/trendingMovies";
 import MovieList from "../components/MovieList";
 import getTrendingTvShows from "../api/trendingTvShow";
 import ButtonComponent from "../components/button";
+import { useNavigate } from "react-router-dom";
 // import getTrendingPeople from '../api/trendingPeople'
 
 function Home() {
@@ -11,7 +12,7 @@ function Home() {
   const[loadingMovies, setLoadingMovies] = useState(false);
   const[tvShows, setTvShows] =useState([]);
   const[loadingTvShows, setLoadinTvShows] = useState([]);
-  
+  const navigate =useNavigate();
 
 // it will make calls on the basis of user choice of time period
  const handleClick = async (type , time_window)=>
@@ -31,6 +32,8 @@ function Home() {
         setLoadinTvShows(false);
       }
   };
+
+  // const handleClickShowAll = async ()
 
 // Fetch trending movies when page loads
   useEffect(
@@ -64,6 +67,7 @@ function Home() {
       <h1 className="text-2xl text-red-600  font-bold mb-4">Trending Movies</h1>
       <ButtonComponent label ="day" value ="day" clickHandler={(val)=>handleClick("movies",val)}/>
       <ButtonComponent label ="week" value ="week" clickHandler={(val)=>handleClick("movies",val)}/>
+      <ButtonComponent label ="show all"  value = "allTrendingMovies" clickHandler ={(val)=>{navigate(`/${val}`)}} />
       {loadingMovies && <p>Loading Movies...</p>}
       {/*  you should prefer conditional rendering  cause you never sure might be result is empty array*/}
       {!loadingMovies && movies.length > 0 && <MovieList movies={movies} />}
